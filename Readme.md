@@ -1,5 +1,5 @@
+grpc- built on Http2
 🚀🚀
-Http2bb
 Types of grpc API
 
 - uniary
@@ -17,14 +17,8 @@ Types of grpc API
 
 }
 
-# scalability
-
 grpc is asynchronous by default . each server can serve millions of request in parallel
 client side load balancing
-
-# security
-
-ssl
 
 grpc-GO
 https://github.com/grpc/grpc-go
