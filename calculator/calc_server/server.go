@@ -7,6 +7,7 @@ import (
 
 	calculator "github.com/fxmbx/grpc-101/calculator/pb"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type Server struct {
@@ -24,7 +25,7 @@ func main() {
 	calculator.RegisterCalculatorServiceServer(grpcServer, &Server{})
 
 	fmt.Println("➿ grpc CALCULATOR server listening on port 50052")
-	// reflection.Register(grpcServer)
+	reflection.Register(grpcServer)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("😞 something went wrong getting grpc server to listen: %v", err)
 	}
