@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -15,6 +16,23 @@ func main() {
 		log.Fatalf("😞 could not connect to grpc server: %v", err)
 	}
 	defer conn.Close()
+
 	grpcClient := greet.NewGreetServiceClient(conn)
-	fmt.Printf("client %f", grpcClient)
+	doUnary(grpcClient)
+}
+
+func doUnary(grpcClient greet.GreetServiceClient) {
+	fmt.Println("starting uniary rpc")
+	request := &greet.GreetRequest{
+		Greeting: &greet.Greeting{
+			FirstName: "funbi",
+			LastName:  "olaore",
+		},
+	}
+	res, err := grpcClient.Greet(context.Background(), request)
+	if err != nil {
+		log.Fatalf("😞 error calling Greet RPC: %v", err)
+	}
+
+	log.Printf("Response from Greet: %v", res.Result)
 }
